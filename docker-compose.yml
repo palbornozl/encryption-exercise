@@ -4,14 +4,16 @@ volumes:
   data-volume: { }
 
 services:
-  db:
+  mysql-exercise:
     image: mysql
     restart: always
+    env_file:
+      - .env
     environment:
-      MYSQL_DATABASE: 'exercise'
-      MYSQL_USER: 'developer'
-      MYSQL_PASSWORD: 'password'
-      MYSQL_ROOT_PASSWORD: 'adminadmin'
+      MYSQL_DATABASE: "${MYSQL_DB}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      #MYSQL_ROOT_PASSWORD: 'adminadmin'
     ports:
       - '3306:3306'
     expose:
@@ -28,7 +30,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8097:8097"
+    expose:
+      - '8097'
     depends_on:
-      - db
+      - mysql-exercise
     links:
-      - db
+      - mysql-exercise:db
