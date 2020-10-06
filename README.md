@@ -4,7 +4,6 @@
 - Apache Maven 3.6.3
 - Docker Engine v19.03.13
 
-
 ### Base de Datos
 El resultado es almacenado en una base de datos relacional embebida (MySQL), cuya tabla debe ser:
 
@@ -29,15 +28,15 @@ Vía BD Mysql Client (workbench)
 
 ### Ejecución
 
-#### Docker
+#### Docker (Recomendado)
 Ejecutar comando: 
 
 `docker-compose -f docker-compose.yml up -d --build`
 
-#### Gradle
+#### Maven
 ```shell script
-source .env
-gradle clean build bootRun
+mvn clean install #opcional: -DskipTests
+sh run.sh
 ```
 
 #### Rest Client
